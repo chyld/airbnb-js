@@ -5,3 +5,4 @@ AirBnB - Node.js Version
 [![Build Status](https://travis-ci.org/chyld/airbnb-js.png?branch=master)](https://travis-ci.org/chyld/airbnb-js)
 [![Coverage Status](https://coveralls.io/repos/chyld/airbnb-js/badge.png)](https://coveralls.io/r/chyld/airbnb-js)
 [![Dependency Status](https://david-dm.org/chyld/airbnb-js.png)](https://david-dm.org/chyld/airbnb-js)
+[![Dependency Status](https://gemnasium.com/chyld/airbnb-js.png)](https://gemnasium.com/chyld/airbnb-js)
