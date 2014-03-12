@@ -5,6 +5,17 @@ var bcrypt = require('bcrypt');
 var users = global.nss.db.collection('users');
 var email = require('../lib/email');
 
+/* ---------------------------------- *
+ * User
+ * _id
+ * email
+ * password
+ * role
+ *
+ * #register
+ * .findByEmailAndPassword
+ * ---------------------------------- */
+
 function User(user){
   this.email = user.email;
   this.password = user.password;
@@ -25,6 +36,22 @@ User.prototype.register = function(fn){
         fn();
       }
     });
+  });
+};
+
+User.findByEmailAndPassword = function(email, password, fn){
+  users.findOne({email:email}, function(err, user){
+    if(user){
+      bcrypt.compare(password, user.password, function(err, result){
+        if(result){
+          fn(user);
+        }else{
+          fn();
+        }
+      });
+    }else{
+      fn();
+    }
   });
 };
 

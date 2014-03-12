@@ -66,5 +66,43 @@ describe('users', function(){
     });
   });
 
+  describe('GET /login', function(){
+    it('should display the login page', function(done){
+      request(app)
+      .get('/login')
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('Login');
+        done();
+      });
+    });
+  });
+
+  describe('POST /login', function(){
+    it('should login a new user', function(done){
+      request(app)
+      .post('/login')
+      .field('email', 'bob@nomail.com')
+      .field('password', '1234')
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        expect(res.text).to.equal('Moved Temporarily. Redirecting to /');
+        done();
+      });
+    });
+
+    it('should not login a new user', function(done){
+      request(app)
+      .post('/login')
+      .field('email', 'wrong@nomail.com')
+      .field('password', '1234')
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('Login');
+        done();
+      });
+    });
+  });
+
 });
 
