@@ -1,0 +1,24 @@
+extends ../shared/template
+
+block content
+  h1= title
+  #map
+
+  script.
+    var places = [];
+
+  ul
+    each listing in listings
+      li
+        span= listing.name
+        span= listing.amount
+        script.
+          var place = {};
+          place.address = '#{listing.address}';
+          place.lat = #{listing.coordinates[0]};
+          place.lng = #{listing.coordinates[1]};
+          places.push(place);
+
+block scripts
+  script(src='/js/source/listings.js')
+
