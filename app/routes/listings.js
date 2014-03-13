@@ -19,3 +19,9 @@ exports.index = function(req, res){
   });
 };
 
+exports.query = function(req, res){
+  Listing.findByGeo(req.query, function(listings){
+    res.send({listings:listings});
+  });
+};
+

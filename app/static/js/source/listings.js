@@ -7,15 +7,42 @@
 
   $(document).ready(initialize);
 
-  var map;
+  var map, lat, lng;
   var markers = [];
 
   function initialize(){
     initMap(0, 0, 2);
-
     for(var i = 0; i < places.length; i++){
       addMarker(places[i]);
     }
+    findMyLocation();
+    $('#search').click(clickSearch);
+  }
+
+  function clickSearch(){
+    var url = '/listings/query?lat=' + lat + '&lng=' + lng;
+    $.getJSON(url, function(data){
+      console.log(data);
+    });
+  }
+
+  function findMyLocation(){
+    getLocation();
+  }
+
+  function getLocation(){
+    var geoOptions = {enableHighAccuracy: true, maximumAge: 1000, timeout: 60000};
+    navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
+  }
+
+  function geoSuccess(location) {
+    lat = location.coords.latitude;
+    lng = location.coords.longitude;
+    $('#search').show();
+  }
+
+  function geoError() {
+    console.log('Sorry, no position available.');
   }
 
   function initMap(lat, lng, zoom){

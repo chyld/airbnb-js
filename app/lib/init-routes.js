@@ -25,6 +25,7 @@ function load(app, fn){
   app.get('/listings/new', d, listings.fresh);
   app.post('/listings', d, listings.create);
   app.get('/listings', d, listings.index);
+  app.get('/listings/query', d, listings.query);
   console.log('Routes Loaded');
   fn();
 }
